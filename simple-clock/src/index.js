@@ -2,19 +2,40 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Clock(prop)
-{
-  return (
-    <div>
-      <h1>Hello User</h1>
-      <h2>Current time : {prop.date.toLocaleTimeString()}</h2>
-    </div>
-  );
+class Clock extends React.Component {
+  constructor(prop)
+  {
+    super(prop);
+
+    this.state = {
+      date: new Date()
+    }
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillMount() {
+    clearInterval(this.timerID);
+  }
+
+  tick()
+  {
+    this.setState( {
+      date: new Date()
+    });
+  }
+
+  render() {
+    
+    return (
+      <div>
+        <h1>Hello User</h1>
+        <h2>Current time : {this.state.date.toLocaleTimeString()}</h2>
+      </div>
+    );
+  }
 }
 
-function tick()
-{
-  ReactDOM.render(<Clock date={new Date()} />, document.getElementById('root'));
-}
-
-setInterval(tick, 1000);
+ReactDOM.render(<Clock />, document.getElementById('root'));
