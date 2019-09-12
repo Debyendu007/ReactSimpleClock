@@ -32,10 +32,16 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello User</h1>
-        <h2>Current time : {this.state.date.toLocaleTimeString()}</h2>
+        <FormattedDate date = {this.state.date} />
       </div>
     );
   }
+}
+
+function FormattedDate(props) {
+  return (
+    <h2>It is {props.date.toLocaleTimeString()}</h2>
+  )
 }
 
 ReactDOM.render(<Clock />, document.getElementById('root'));
